@@ -1,5 +1,16 @@
 version: "3.9"
 services:
+  postgres:
+    image: "postgres:14"
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: "5918"
+      POSTGRES_DB: "studying_db"
+    expose:
+      - 5432
+
   web:
     build: .
     expose:
@@ -13,6 +24,8 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+    depends_on:
+      - postgres
 
   nginx:
     build: ./nginx
@@ -29,3 +42,4 @@ services:
 volumes:
   static_volume:
   media_volume:
+  postgres_data:
