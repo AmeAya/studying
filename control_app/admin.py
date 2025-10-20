@@ -3,7 +3,7 @@ from django.apps import apps
 from django.contrib.admin.sites import AlreadyRegistered
 
 
-app = apps.get_app_config('main_app')
+app = apps.get_app_config('control_app')
 
 for model in app.get_models():
     try:
